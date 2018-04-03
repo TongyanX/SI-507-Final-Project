@@ -6,7 +6,7 @@ from plotly.graph_objs import *
 from plotly.offline import plot as offplot
 
 from project.scripts.dbOperation import Database
-from project.scripts.secret_file import mapbox_access_token
+from project.secrets.secret_file import mapbox_access_token
 
 
 def bar_state_univ(limit=20):
