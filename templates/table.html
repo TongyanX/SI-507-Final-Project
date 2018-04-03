@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table - US National University Data</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table-page.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+</head>
+<body>
+    <div class="row title-chunk">
+        <div class="col-md-9">
+            <h1 class="title">&nbsp&nbspTable - US National University Data</h1>
+        </div>
+        <div class="col-md-3" align="right">
+            <a href="/" class="back">Back</a>
+        </div>
+    </div>
+    <div class="row content-chunk">
+        <div class="row table-chunk">
+            <table>
+                <tbody>
+                    <tr class="table-img">
+                        <td>
+                            <img src="{{ url_for('static', filename='img/univ.svg') }}"/>
+                        </td>
+                        <td class="table-empty-col"></td>
+                        <td>
+                            <img src="{{ url_for('static', filename='img/gdp.jpg') }}"/>
+                        </td>
+                    </tr>
+                    <tr class="table-empty-row"></tr>
+                    <tr class="table-text">
+                        <td class="table-info">
+                            <button class="button-user" onclick="univ()"><strong>National University</strong></button>
+                        </td>
+                        <td class="table-empty-col"></td>
+                        <td class="table-info">
+                            <button class="button-user" onclick="gdp()"><strong>State GDP</strong></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row foot-chunk">
+        <div class="foot">
+            <p>SI 507 Final Project&nbsp&nbsp一&nbsp&nbspMade by Tongyan Xu&nbsp&nbsp</p>
+        </div>
+    </div>
+</body>
+<script>
+    function univ(){
+        window.location.href="/table/univ";
+    }
+
+    function gdp(){
+        window.location.href="/table/gdp";
+    }
+</script>
+</html>

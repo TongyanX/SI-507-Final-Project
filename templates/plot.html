@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plot - US National University Data</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plot-page.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plot.js') }}"></script>
+</head>
+<body>
+    <div class="row title-chunk">
+        <div class="col-md-9">
+            <h1 class="title">&nbsp&nbspPlot - US National University Data</h1>
+        </div>
+        <div class="col-md-3" align="right">
+            <a href="/" class="back">Back</a>
+        </div>
+    </div>
+
+    <div class="row content-chunk">
+        <div class="content-table">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="plot-unit">
+                            <table>
+                                <tbody class="plot-unit-bg">
+                                    <tr>
+                                        <div class="type">
+                                            <p><strong>Bar plot</strong> - State University</p>
+                                        </div>
+                                    </tr>
+                                    <tr class="table-empty-row-2"></tr>
+                                    <tr>
+                                        <td class="img-td">
+                                            <div class="img-div">
+                                                <img src="/static/img/bar.png"/>
+                                            </div>
+                                        </td>
+                                        <td class="table-empty-col-2"></td>
+                                        <td>
+                                            <div class="plot-content">
+                                                <div class="text">
+                                                    <p>
+                                                        To see top 10, 15, 20 states with highest amount of national universities.
+                                                    </p>
+                                                </div>
+                                                <div class="button-chunk">
+                                                    <button class="button-user" onclick="bar()">Plot</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td class="table-empty-col"></td>
+                        <td class="plot-unit">
+                            <table>
+                                <tbody class="plot-unit-bg">
+                                    <tr>
+                                        <div class="type">
+                                            <p><strong>Line plot</strong> - State GDP</p>
+                                        </div>
+                                    </tr>
+                                    <tr class="table-empty-row-2"></tr>
+                                    <tr>
+                                        <td class="img-td">
+                                            <div class="img-div">
+                                                <img src="/static/img/line.png"/>
+                                            </div>
+                                        </td>
+                                        <td class="table-empty-col-2"></td>
+                                        <td>
+                                            <div class="plot-content">
+                                                <div class="text">
+                                                    <p>
+                                                        To see GDP time trends (from 1997 to 2016) of all your interested states together. Better within 20 states.
+                                                    </p>
+                                                </div>
+                                                <div class="button-chunk">
+                                                    <button class="button-user" onclick="line()">Plot</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td class="table-empty-col"></td>
+                        <td class="plot-unit">
+                            <table>
+                                <tbody class="plot-unit-bg">
+                                    <tr>
+                                        <div class="type">
+                                            <p><strong>Histogram</strong> - Tuition Difference</p>
+                                        </div>
+                                    </tr>
+                                    <tr class="table-empty-row-2"></tr>
+                                    <tr>
+                                        <td class="img-td">
+                                            <div class="img-div">
+                                                <img src="/static/img/histo.png"/>
+                                            </div>
+                                        </td>
+                                        <td class="table-empty-col-2"></td>
+                                        <td>
+                                            <div class="plot-content">
+                                                <div class="text">
+                                                    <p>
+                                                        To see discrimination of tuition and fees in public universities for in-state and out-of-state students.
+                                                    </p>
+                                                </div>
+                                                <div class="button-chunk">
+                                                    <button class="button-user" onclick="histogram_plot()">Plot</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="table-empty-row"></tr>
+                    <tr>
+                        <td class="plot-unit">
+                            <table>
+                                <tbody class="plot-unit-bg">
+                                    <tr>
+                                        <div class="type">
+                                            <p><strong>Bubble plot</strong> - University vs GDP</p>
+                                        </div>
+                                    </tr>
+                                    <tr class="table-empty-row-2"></tr>
+                                    <tr>
+                                        <td class="img-td">
+                                            <div class="img-div">
+                                                <img src="/static/img/bubble.png"/>
+                                            </div>
+                                        </td>
+                                        <td class="table-empty-col-2"></td>
+                                        <td>
+                                            <div class="plot-content">
+                                                <div class="text">
+                                                    <p>
+                                                        To see relationship between university amount and GDP value. You can also add some other features.
+                                                    </p>
+                                                </div>
+                                                <div class="button-chunk">
+                                                    <button class="button-user" onclick="bubble()">Plot</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td class="table-empty-col"></td>
+                        <td class="plot-unit">
+                            <table>
+                                <tbody class="plot-unit-bg">
+                                    <tr>
+                                        <div class="type">
+                                            <p><strong>Scatter plot</strong> - Public vs Private</p>
+                                        </div>
+                                    </tr>
+                                    <tr class="table-empty-row-2"></tr>
+                                    <tr>
+                                        <td class="img-td">
+                                            <div class="img-div">
+                                                <img src="/static/img/scatter.png"/>
+                                            </div>
+                                        </td>
+                                        <td class="table-empty-col-2"></td>
+                                        <td>
+                                            <div class="plot-content">
+                                                <div class="text">
+                                                    <p>
+                                                        To see differences between public and private universities. You can choose features whatever you like.
+                                                    </p>
+                                                </div>
+                                                <div class="button-chunk">
+                                                    <button class="button-user" onclick="scatter()">Plot</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td class="table-empty-col"></td>
+                        <td class="plot-unit">
+                            <table>
+                                <tbody class="plot-unit-bg">
+                                    <tr>
+                                        <div class="type">
+                                            <p><strong>Map Plot</strong> - University Location</p>
+                                        </div>
+                                    </tr>
+                                    <tr class="table-empty-row-2"></tr>
+                                    <tr>
+                                        <td class="img-td">
+                                            <div class="img-div">
+                                                <img src="/static/img/map.png"/>
+                                            </div>
+                                        </td>
+                                        <td class="table-empty-col-2"></td>
+                                        <td>
+                                            <div class="plot-content">
+                                                <div class="text">
+                                                    <p>
+                                                        To see a map including all universities in your interested state (marked by blue dots).
+                                                    </p>
+                                                </div>
+                                                <div class="button-chunk">
+                                                    <button class="button-user" onclick="map()">Plot</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="hidden-chunk-1" id="hidden-bar">
+            <h1 align="center">Bar Plot</h1>
+            <h3 align="center">State University</h3>
+            <br>
+            <div align="center">
+                <p>Top ? States</p>
+                <select id="limit">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                <br><br><br>
+                <button class="button-user-2" onclick="bar_plot()">Plot</button>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="button-user-2" onclick="bar_cancel()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="hidden-chunk-line" id="hidden-line">
+            <h1 align="center">Line Plot</h1>
+            <h3 align="center">State GDP</h3>
+            <br>
+            <div align="center">
+                <div class="input-chunk">
+                    <div class="input-content" align="left">
+                        <div class="col-md-2">
+                            <input id="AL" name="state" type="checkbox">
+                            <label for="AL">Alabama (AL)</label>
+                            <br>
+                            <input id="CT" name="state" type="checkbox">
+                            <label for="CT">Connecticut (CT)</label>
+                            <br>
+                            <input id="ID" name="state" type="checkbox">
+                            <label for="ID">Idaho (ID)</label>
+                            <br>
+                            <input id="LA" name="state" type="checkbox">
+                            <label for="LA">Louisiana (LA)</label>
+                            <br>
+                            <input id="MS" name="state" type="checkbox">
+                            <label for="MS">Mississippi (MS)</label>
+                            <br>
+                            <input id="NJ" name="state" type="checkbox">
+                            <label for="NJ">New Jersey (NJ)</label>
+                            <br>
+                            <input id="OK" name="state" type="checkbox">
+                            <label for="OK">Oklahoma (OK)</label>
+                            <br>
+                            <input id="TN" name="state" type="checkbox">
+                            <label for="TN">Tennessee (TN)</label>
+                            <br>
+                            <input id="WV" name="state" type="checkbox">
+                            <label for="WV">West Virginia (WV)</label>
+                            <br>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="AK" name="state" type="checkbox">
+                            <label for="AK">Alaska (AK)</label>
+                            <br>
+                            <input id="DE" name="state" type="checkbox">
+                            <label for="DE">Delaware (DE)</label>
+                            <br>
+                            <input id="IL" name="state" type="checkbox">
+                            <label for="IL">Illinois (IL)</label>
+                            <br>
+                            <input id="ME" name="state" type="checkbox">
+                            <label for="ME">Maine (ME)</label>
+                            <br>
+                            <input id="MO" name="state" type="checkbox">
+                            <label for="MO">Missouri (MO)</label>
+                            <br>
+                            <input id="NM" name="state" type="checkbox">
+                            <label for="NM">New Mexico (NM)</label>
+                            <br>
+                            <input id="OR" name="state" type="checkbox">
+                            <label for="OR">Oregon (OR)</label>
+                            <br>
+                            <input id="TX" name="state" type="checkbox">
+                            <label for="TX">Texas (TX)</label>
+                            <br>
+                            <input id="WI" name="state" type="checkbox">
+                            <label for="WI">Wisconsin (WI)</label>
+                            <br>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="AZ" name="state" type="checkbox">
+                            <label for="AZ">Arizona (AZ)</label>
+                            <br>
+                            <input id="DC" name="state" type="checkbox">
+                            <label for="DC">District of Columbia (DC)</label>
+                            <br>
+                            <input id="IN" name="state" type="checkbox">
+                            <label for="IN">Indiana (IN)</label>
+                            <br>
+                            <input id="MD" name="state" type="checkbox">
+                            <label for="MD">Maryland (MD)</label>
+                            <br>
+                            <input id="MT" name="state" type="checkbox">
+                            <label for="MT">Montana (MT)</label>
+                            <br>
+                            <input id="NY" name="state" type="checkbox">
+                            <label for="NY">New York (NY)</label>
+                            <br>
+                            <input id="PA" name="state" type="checkbox">
+                            <label for="PA">Pennsylvania (PA)</label>
+                            <br>
+                            <input id="UT" name="state" type="checkbox">
+                            <label for="UT">Utah (UT)</label>
+                            <br>
+                            <input id="WY" name="state" type="checkbox">
+                            <label for="WY">Wyoming (WY)</label>
+                            <br>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="AR" name="state" type="checkbox">
+                            <label for="AR">Arkansas (AR)</label>
+                            <br>
+                            <input id="FL" name="state" type="checkbox">
+                            <label for="FL">Florida (FL)</label>
+                            <br>
+                            <input id="IA" name="state" type="checkbox">
+                            <label for="IA">Iowa (IA)</label>
+                            <br>
+                            <input id="MA" name="state" type="checkbox">
+                            <label for="MA">Massachusetts (MA)</label>
+                            <br>
+                            <input id="NE" name="state" type="checkbox">
+                            <label for="NE">Nebraska (NE)</label>
+                            <br>
+                            <input id="NC" name="state" type="checkbox">
+                            <label for="NC">North Carolina (NC)</label>
+                            <br>
+                            <input id="RI" name="state" type="checkbox">
+                            <label for="RI">Rhode Island (RI)</label>
+                            <br>
+                            <input id="VT" name="state" type="checkbox">
+                            <label for="VT">Vermont (VT)</label>
+                            <br>
+                            <input id="ALL" name="ALL" type="checkbox">
+                            <label for="ALL">Select All</label>
+                            <br>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="CA" name="state" type="checkbox">
+                            <label for="CA">California (CA)</label>
+                            <br>
+                            <input id="GA" name="state" type="checkbox">
+                            <label for="GA">Georgia (GA)</label>
+                            <br>
+                            <input id="KS" name="state" type="checkbox">
+                            <label for="KS">Kansas (KS)</label>
+                            <br>
+                            <input id="MI" name="state" type="checkbox">
+                            <label for="MI">Michigan (MI)</label>
+                            <br>
+                            <input id="NV" name="state" type="checkbox">
+                            <label for="NV">Nevada (NV)</label>
+                            <br>
+                            <input id="ND" name="state" type="checkbox">
+                            <label for="ND">North Dakota (ND)</label>
+                            <br>
+                            <input id="SC" name="state" type="checkbox">
+                            <label for="SC">South Carolina (SC)</label>
+                            <br>
+                            <input id="VA" name="state" type="checkbox">
+                            <label for="VA">Virginia (VA)</label>
+                            <br>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="CO" name="state" type="checkbox">
+                            <label for="CO">Colorado (CO)</label>
+                            <br>
+                            <input id="HI" name="state" type="checkbox">
+                            <label for="HI">Hawaii (HI)</label>
+                            <br>
+                            <input id="KY" name="state" type="checkbox">
+                            <label for="KY">Kentucky (KY)</label>
+                            <br>
+                            <input id="MN" name="state" type="checkbox">
+                            <label for="MN">Minnesota (MN)</label>
+                            <br>
+                            <input id="NH" name="state" type="checkbox">
+                            <label for="NH">New Hampshire (NH)</label>
+                            <br>
+                            <input id="OH" name="state" type="checkbox">
+                            <label for="OH">Ohio (OH)</label>
+                            <br>
+                            <input id="SD" name="state" type="checkbox">
+                            <label for="SD">South Dakota (SD)</label>
+                            <br>
+                            <input id="WA" name="state" type="checkbox">
+                            <label for="WA">Washington (WA)</label>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br>
+                <button class="button-user-2" onclick="line_plot()">Plot</button>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="button-user-2" onclick="line_cancel()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="hidden-chunk-1" id="hidden-bubble">
+            <h1 align="center">Bubble Plot</h1>
+            <h3 align="center">University vs GDP</h3>
+            <br>
+            <div align="center">
+                <p>Additional Parameter</p>
+                <select id="add_param">
+                    <option value="Default">Default</option>
+                    <option value="Total Endowment (Million)">Total Endowment</option>
+                    <option value="Average Endowment (Million)">Average Endowment</option>
+                    <option value="Total Enrollment">Total Enrollment</option>
+                    <option value="Average Enrollment">Average Enrollment</option>
+                    <option value="Average Tuition in State">Average Tuition in State</option>
+                    <option value="Average Tuition out of State">Average Tuition out of State</option>
+                    <option value="Average Median Starting Salary">Average Median Starting Salary</option>
+                    <option value="Average Student Faculty Ratio">Average Student Faculty Ratio</option>
+                    <option value="Average Female Percentage">Average Female Percentage</option>
+                </select>
+                <br><br><br><br>
+                <button class="button-user-2" onclick="bubble_plot()">Plot</button>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="button-user-2" onclick="bubble_cancel()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="hidden-chunk-2" id="hidden-scatter">
+            <h1 align="center">Scatter Plot</h1>
+            <h3 align="center">Public vs Private</h3>
+            <br>
+            <div align="center">
+                <p>X - Axis</p>
+                <select id="x">
+                    <option value="Default">Default</option>
+                    <option value="Enrollment">Enrollment</option>
+                    <option value="MedianStartingSalary">Median Starting Salary</option>
+                    <option value="FoundYear">Found Year</option>
+                    <option value="Endowment(M)">Endowment</option>
+                    <option value="StudentFacultyRatio">Student Faculty Ratio</option>
+                    <option value="FemalePercentage">Female Percentage</option>
+                    <option value="TuitionAndFeesInState">Tuition and Fees in State</option>
+                    <option value="TuitionAndFeesOutOfState">Tuition and Fees out of State</option>
+                    <option value="Tuition Difference">Tuition Difference</option>
+                </select>
+                <br><br>
+                <p>Y - Axis</p>
+                <select id="y">
+                    <option value="Default">Default</option>
+                    <option value="Enrollment">Enrollment</option>
+                    <option value="MedianStartingSalary">Median Starting Salary</option>
+                    <option value="FoundYear">Found Year</option>
+                    <option value="Endowment(M)">Endowment</option>
+                    <option value="StudentFacultyRatio">Student Faculty Ratio</option>
+                    <option value="FemalePercentage">Female Percentage</option>
+                    <option value="TuitionAndFeesInState">Tuition and Fees in State</option>
+                    <option value="TuitionAndFeesOutOfState">Tuition and Fees out of State</option>
+                    <option value="Tuition Difference">Tuition Difference</option>
+                </select>
+                <br><br><br>
+                <button class="button-user-2" onclick="scatter_plot()">Plot</button>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="button-user-2" onclick="scatter_cancel()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="hidden-chunk-1" id="hidden-map">
+            <h1 align="center">Map Plot</h1>
+            <h3 align="center">University Location</h3>
+            <br>
+            <div align="center">
+                <p>State</p>
+                <select id="state">
+                    <option value="AL">Alabama (AL)</option>
+                    <option value="AK">Alaska (AK)</option>
+                    <option value="AZ">Arizona (AZ)</option>
+                    <option value="AR">Arkansas (AR)</option>
+                    <option value="CA">California (CA)</option>
+                    <option value="CO">Colorado (CO)</option>
+                    <option value="CT">Connecticut (CT)</option>
+                    <option value="DE">Delaware (DE)</option>
+                    <option value="DC">District of Columbia (DC)</option>
+                    <option value="FL">Florida (FL)</option>
+                    <option value="GA">Georgia (GA)</option>
+                    <option value="HI">Hawaii (HI)</option>
+                    <option value="ID">Idaho (ID)</option>
+                    <option value="IL">Illinois (IL)</option>
+                    <option value="IN">Indiana (IN)</option>
+                    <option value="IA">Iowa (IA)</option>
+                    <option value="KS">Kansas (KS)</option>
+                    <option value="KY">Kentucky (KY)</option>
+                    <option value="LA">Louisiana (LA)</option>
+                    <option value="ME">Maine (ME)</option>
+                    <option value="MD">Maryland (MD)</option>
+                    <option value="MA">Massachusetts (MA)</option>
+                    <option value="MI">Michigan (MI)</option>
+                    <option value="MN">Minnesota (MN)</option>
+                    <option value="MS">Mississippi (MS)</option>
+                    <option value="MO">Missouri (MO)</option>
+                    <option value="MT">Montana (MT)</option>
+                    <option value="NE">Nebraska (NE)</option>
+                    <option value="NV">Nevada (NV)</option>
+                    <option value="NH">New Hampshire (NH)</option>
+                    <option value="NJ">New Jersey (NJ)</option>
+                    <option value="NM">New Mexico (NM)</option>
+                    <option value="NY">New York (NY)</option>
+                    <option value="NC">North Carolina (NC)</option>
+                    <option value="ND">North Dakota (ND)</option>
+                    <option value="OH">Ohio (OH)</option>
+                    <option value="OK">Oklahoma (OK)</option>
+                    <option value="OR">Oregon (OR)</option>
+                    <option value="PA">Pennsylvania (PA)</option>
+                    <option value="RI">Rhode Island (RI)</option>
+                    <option value="SC">South Carolina (SC)</option>
+                    <option value="SD">South Dakota (SD)</option>
+                    <option value="TN">Tennessee (TN)</option>
+                    <option value="TX">Texas (TX)</option>
+                    <option value="UT">Utah (UT)</option>
+                    <option value="VT">Vermont (VT)</option>
+                    <option value="VA">Virginia (VA)</option>
+                    <option value="WA">Washington (WA)</option>
+                    <option value="WV">West Virginia (WV)</option>
+                    <option value="WI">Wisconsin (WI)</option>
+                    <option value="WY">Wyoming (WY)</option>
+                </select>
+                <br><br><br>
+                <button class="button-user-2" onclick="map_plot()">Plot</button>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="button-user-2" onclick="map_cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row foot-chunk">
+        <div class="foot">
+            <p>SI 507 Final Project&nbsp&nbsp一&nbsp&nbspMade by Tongyan Xu&nbsp&nbsp</p>
+        </div>
+    </div>
+
+    <div class="hidden-chunk-plot" id="plot-result">
+        <div align="right">
+            <button class="button-user-3" onclick="close_plot()">Close</button>
+        </div>
+        <div id="plot" style="height: 600px"></div>
+    </div>
+</body>
+<script>
+    $("#ALL").click(function(){
+        var status = $(this).prop("checked");
+        var other = $("input[name='state']").prop("checked", status);
+    });
+</script>
+</html>

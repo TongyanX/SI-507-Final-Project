@@ -1,0 +1,42 @@
+body {
+    padding-left: 15px;
+    padding-right: 15px
+}
+.title-chunk {
+    background-color: #1E1F26;
+    color: #FFFFFF;
+    height: 90px
+}
+.title {
+    position: relative;
+    top: 2px
+}
+.content-chunk {
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 586px;
+    position: relative;
+    top: 15px
+}
+.compress-content-chunk {
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 586px
+}
+.foot-chunk {
+    background-color: #1E1F26;
+    height: 50px
+}
+.foot {
+    color: #FFFFFF;
+    font-size: 20px;
+    text-align: right;
+    position: relative;
+    top: 10px
+}
+.back {
+    color: #FFFFFF;
+    font-size: 20px;
+    position: relative;
+    top: 10px
+}

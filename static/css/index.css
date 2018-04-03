@@ -1,0 +1,49 @@
+.table-table {
+    height: 150px
+}
+.table-plot {
+    height: 390px
+}
+.table-empty-row {
+    height: 10px
+}
+.table-info {
+    text-align: center;
+    width: 240px;
+    background-color: #283655
+}
+.table-content {
+    text-align: left;
+    width: 800px;
+    background-color: #D0E1F9;
+    padding-left: 30px;
+    padding-right: 30px
+}
+.table-empty-col {
+    width: 10px
+}
+.link-to-content {
+    font-size: 30px;
+    color: #FFFFFF
+}
+.table-content-head {
+    font-size: 20px;
+    height: 40px
+}
+.table-content-list-1 {
+    font-size: 20px;
+    height: 40px
+}
+.table-content-list-2 {
+    font-size: 20px;
+    height: 30px
+}
+.table-content-detail {
+    font-size: 16px;
+    padding-left: 60px;
+    height: 24px
+}
+img {
+    height: 550px;
+    width: 280px
+}

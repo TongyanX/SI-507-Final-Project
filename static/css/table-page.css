@@ -1,0 +1,27 @@
+.table-chunk {
+    padding-left: 180px;
+    padding-right: 180px;
+    position: relative;
+    top: 20px
+}
+.table-empty-row {
+    height: 30px
+}
+.table-img {
+    text-align: center
+}
+.button-user {
+    text-align: center;
+    width: 400px;
+    height: 85px;
+    background-color: #283655;
+    font-size: 30px;
+    color: #FFFFFF
+}
+.table-empty-col {
+    width: 160px
+}
+img {
+    height: 380px;
+    width: 380px
+}
