@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 """Plotting Functions"""
 
+import sys
+import os
 from flask import Flask, request, render_template
+
 from project.scripts.tableFunc import *
 from project.scripts.plotFunc import *
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 app = Flask(__name__)
 
 
@@ -96,4 +100,4 @@ def mapbox():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
