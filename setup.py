@@ -3,6 +3,7 @@
 
 import sys
 import os
+import webbrowser
 from flask import Flask, request, render_template
 
 from project.scripts.tableFunc import *
@@ -101,4 +102,5 @@ def mapbox():
 
 if __name__ == '__main__':
     plotly_setup()
+    webbrowser.open('http://127.0.0.1:5000/')
     app.run()

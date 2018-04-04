@@ -49,7 +49,8 @@ resp = requests.get(url, headers={'User-Agent': 'Chrome/59.0.3071.115'})
 **Access Instruction:**  
 - Open the url above or the following url (*https://developers.google.com/places/web-service/get-api-key*), and click **< GET A KEY >**.  
 - Follow the instructions until an API Key is obtained.  
-- Open the local directory of this project, and open the secret_file.py (*SI-507-Final-Project/project/secrets/secret_file.py*).  
+- Open the local directory of this project, and open the **secret_file.py**.
+	> **Local Path:** SI-507-Final-Project/project/secrets/secret_file.py  
 - Copy and paste the API Key into the correct place in the file.  
 - For project user, you would be suggested to do so **only if** both the local database file and the GPS cache file are lost.  
   
@@ -207,22 +208,22 @@ This project is programmed in **Python3**.
 ## Important Python Functions (or Files)  
   
 **get_national_university_data**  
-This function is used to extract **national university info** from HTML structures that requested from **US News websites**. Caching mechanism is not considered in this function but is included in its parent functions.  
+This function is used to extract national university info from HTML structures that requested from US News websites. Caching mechanism is not considered in this function but is included in its parent functions.  
 >**Defined at:** SI-507-Final-Project/project/scripts/universityData.py   
 
 **plotFunc.py**  
-**All functions** in this file are used to get necessary data from the database and create **HTML ``<div>``** containing information of plots, through **Plotly offline plotting**.  
+**All functions** in this file are used to get necessary data from the database and create **HTML ``<div>``** containing information of plots, through Plotly offline plotting.  
 >**Local Path:** SI-507-Final-Project/project/scripts/plotFunc.py  
   
 **tableFunc.py**  
-**All functions** in this file are used to get necessary data from the database and create **JSON** strings containing information for **DataTables**.  
+**All functions** in this file are used to get necessary data from the database and create **JSON** strings containing information for DataTables.  
 >**Local Path:** SI-507-Final-Project/project/scripts/tableFunc.py  
   
 ## Important Python Classes (or Files)  
   
 **NationalUniversity**  
-Each instance represents a **national university** in US with all features extracted from the **US News websites**.  
-While creating instances using parsed data, the class **__ init __** method will automatically make request to **Google Places API** and get the **GPS info** for the university.  
+Each instance represents a **national university** in US with all features extracted from the US News websites.  
+While creating instances using parsed data, the class **__ init __** method will automatically make request to Google Places API and get the GPS info for the university.  
 >**Defined at:** SI-507-Final-Project/project/scripts/classDef.py   
 
 **Database**  
@@ -274,12 +275,12 @@ Follow the instructions below to run / set up the project.
 	> source venv/bin/activate
 	```
 		
-3. **Run the project**.
+2. **Run the project**.
 	```
 	> python3 setup.py
 	```
 
-4. **Terminate the project**.
+3. **Terminate the project**.
 	```
 	>  [ Ctrl + C ]
 	> deactivate
