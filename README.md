@@ -102,15 +102,24 @@ The rebuilding process is **fast** when it is based on the **cache files**. If t
 ## Obtain Plotly API Key  
   
 1. Open https://plot.ly/. Create an account and log in.  
+
 2. Enter **< Settings >** and find **< API Keys >**.  
+
 3. Click **< Regenerate Key >** and copy the newly generated key.  
-  
-## Enter Key into Project  
+
+## Obtain Mapbox Access Token
+
+1. Open https://www.mapbox.com/signin/?route-to=https://www.mapbox.com/studio/. Create an account and log in.
+
+2. Enter **< Account >** and copy the Access Token.
+
+## Enter Key & Access Token into Project  
   
 1. Open local file **secret_file.py** using text editor.  
    >**Local Path:** SI-507-Final-Project/project/secrets/secret_file.py  
   
-2. Enter the **Plotly Username** and paste the **Plotly API Key** into the correct places.  
+2. Paste the **Mapbox Access Token**, **Plotly API Key**, and enter the **Plotly Username** into the correct places.  
+
 <br>  
   
   
