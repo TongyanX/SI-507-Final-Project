@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Common Functions Including Cache and Database"""
+"""Database Operations"""
 
 import sqlite3
 import os
@@ -25,8 +25,14 @@ class Database(object):
             'Tuition Difference': 'TuitionAndFeesOutOfState - TuitionAndFeesInState'
         }
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.con.close()
+
     def check_database(self):
-        """Check Database"""
+        """Check if Database is Complete"""
         if not self.check_table('National_University'):
             from project.scripts import universityData
             universityData.main()

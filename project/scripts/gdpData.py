@@ -26,18 +26,18 @@ def get_gdp_data():
 def gdp_state_table():
     """Initialize GDP State Table"""
     t_name = 'GDP_State'
-    db_operator = Database()
-    column_name, column_data = get_gdp_data()
 
+    column_name, column_data = get_gdp_data()
     column_list = ['TEXT'] + ['INT'] * (len(column_name) - 1)
 
     table_dict = dict(name=t_name,
                       column=list(zip(column_name, column_list)),
                       key=column_name[0]
                       )
-    db_operator.create_table(table_dict)
 
-    db_operator.insert_data([tuple(row) for row in column_data], t_name)
+    with Database() as db_operator:
+        db_operator.create_table(table_dict)
+        db_operator.insert_data([tuple(row) for row in column_data], t_name)
 
 
 def main():

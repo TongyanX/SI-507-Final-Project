@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Plotting Functions"""
+"""Set up Server"""
 
 import sys
 import os
@@ -100,4 +100,5 @@ def mapbox():
 
 
 if __name__ == '__main__':
+    plotly_setup()
     app.run()

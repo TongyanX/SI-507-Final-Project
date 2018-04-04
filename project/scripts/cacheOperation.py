@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Common Functions Including Cache and Database"""
+"""Cache Operations"""
 
 import json
 import os

@@ -4,9 +4,16 @@
 from plotly.exceptions import PlotlyRequestError
 from plotly.graph_objs import *
 from plotly.offline import plot as offplot
+from plotly.tools import set_credentials_file
 
 from project.scripts.dbOperation import Database
 from project.secrets.secret_file import mapbox_access_token
+
+
+def plotly_setup():
+    """Plotly Setup with User Name and API Key"""
+    from project.secrets.secret_file import plotly_username, plotly_api_key
+    set_credentials_file(username=plotly_username, api_key=plotly_api_key)
 
 
 def bar_state_univ(limit=20):
@@ -15,9 +22,9 @@ def bar_state_univ(limit=20):
         print('Invalid Input')
         return
 
-    db_operator = Database()
-    db_operator.check_database()
-    result_list = db_operator.get_university_count(limit)
+    with Database() as db_operator:
+        db_operator.check_database()
+        result_list = db_operator.get_university_count(limit)
 
     data = [Bar(x=[result[0] for result in result_list],
                 y=[result[1] for result in result_list],
@@ -45,9 +52,9 @@ def scatter_university_gdp(input_phrase='Total Endowment (Million)'):
     if input_phrase not in input_range:
         input_phrase = 'Total Endowment (Million)'
 
-    db_operator = Database()
-    db_operator.check_database()
-    result_list = db_operator.get_university_gdp(additional_variable=input_phrase)
+    with Database() as db_operator:
+        db_operator.check_database()
+        result_list = db_operator.get_university_gdp(additional_variable=input_phrase)
 
     if input_phrase == 'Average Student Faculty Ratio':
         text_format = '{0} ({1})<br>{2}: {3}:1'
@@ -97,9 +104,9 @@ def scatter_public_private(x_axis='Enrollment', y_axis='MedianStartingSalary'):
     if y_axis not in axis_range:
         y_axis = 'MedianStartingSalary'
 
-    db_operator = Database()
-    db_operator.check_database()
-    result_list = db_operator.get_public_private(x_axis=x_axis, y_axis=y_axis)
+    with Database() as db_operator:
+        db_operator.check_database()
+        result_list = db_operator.get_public_private(x_axis=x_axis, y_axis=y_axis)
 
     trace1 = Scatter(x=[result[0] for result in result_list if result[2] == 'Private'],
                      y=[result[1] for result in result_list if result[2] == 'Private'],
@@ -146,21 +153,21 @@ def line_gdp(abbr_list):
     #     print('Too Many States')
     #     return
 
-    db_operator = Database()
-    db_operator.check_database()
+    with Database() as db_operator:
+        db_operator.check_database()
 
-    data = []
-    for state_abbr in abbr_list:
-        result = db_operator.get_state_gdp(state_abbr=state_abbr)
+        data = []
+        for state_abbr in abbr_list:
+            result = db_operator.get_state_gdp(state_abbr=state_abbr)
 
-        if result is None:
-            print('No Result')
-            continue
+            if result is None:
+                print('No Result')
+                continue
 
-        data.append(Scatter(x=list(range(1996, 2017)),
-                            y=result[1:],
-                            mode='lines+markers',
-                            name=state_abbr))
+            data.append(Scatter(x=list(range(1996, 2017)),
+                                y=result[1:],
+                                mode='lines+markers',
+                                name=state_abbr))
 
     layout = Layout(xaxis=dict(tickfont=dict(size=15),
                                title='Year',
@@ -201,9 +208,9 @@ def get_axis_info(lat_list, lon_list):
 
 def mapbox_univ(state_abbr):
     """Plot National Universities on Map through Mapbox"""
-    db_operator = Database()
-    db_operator.check_database()
-    result_list = db_operator.get_gps_data(state_abbr=state_abbr)
+    with Database() as db_operator:
+        db_operator.check_database()
+        result_list = db_operator.get_gps_data(state_abbr=state_abbr)
 
     lat_list = []
     lon_list = []
@@ -244,9 +251,9 @@ def mapbox_univ(state_abbr):
 
 def histogram_difference_tuition():
     """Plot Histogram Showing Difference between In-State and Out-of-State Tuition and Fees of Public Universities"""
-    db_operator = Database()
-    db_operator.check_database()
-    result_list = db_operator.get_tuition_difference()
+    with Database() as db_operator:
+        db_operator.check_database()
+        result_list = db_operator.get_tuition_difference()
 
     data = [Bar(x=['0', '0 ~ 5,000', '5,000 ~ 10,000', '10,000 ~ 15,000', '15,000 ~ 20,000', '20,000 ~ 25,000',
                    '25,000 ~ 30,000', '> 30,000'],

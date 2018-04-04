@@ -23,16 +23,17 @@ def get_state_abbr_data():
 def state_abbr_table():
     """Initialize State Abbreviation Table"""
     t_name = 'State_Abbr'
-    db_operator = Database()
+
     data_dict = get_state_abbr_data()
     data_dict['DC'] = 'District of Columbia'
 
     table_dict = dict(name=t_name,
                       column=[('StateAbbr', 'TEXT'),
                               ('StateName', 'TEXT')])
-    db_operator.create_table(table_dict)
 
-    db_operator.insert_data(list(data_dict.items()), t_name)
+    with Database() as db_operator:
+        db_operator.create_table(table_dict)
+        db_operator.insert_data(list(data_dict.items()), t_name)
 
 
 def main():

@@ -6,7 +6,7 @@ import json
 import requests
 
 from project.scripts.cacheOperation import load_cache, save_cache
-from project.secrets.secret_file import google_places_key
+from project.secrets.secret_file import google_places_api_key
 
 # US lat-long range for checking locations of sites
 us_lat_range = [19.50139, 64.85694]
@@ -67,7 +67,7 @@ class NationalUniversity(object):
             detail_list.append(self.state)
         if nation is True:
             detail_list.append('US')
-        params = {'key': google_places_key,
+        params = {'key': google_places_api_key,
                   'query': ', '.join(detail_list),
                   'types': 'school'}
 
