@@ -2,45 +2,56 @@ function bar(){
     document.getElementById("hidden-bar").style.display="block";
 };
 
+
 function bar_cancel(){
     document.getElementById("hidden-bar").style.display="none";
 };
+
 
 function line(){
     document.getElementById("hidden-line").style.display="block";
 };
 
+
 function line_cancel(){
     document.getElementById("hidden-line").style.display="none";
 };
+
 
 function bubble(){
     document.getElementById("hidden-bubble").style.display="block";
 };
 
+
 function bubble_cancel(){
     document.getElementById("hidden-bubble").style.display="none";
 };
+
 
 function scatter(){
     document.getElementById("hidden-scatter").style.display="block";
 };
 
+
 function scatter_cancel(){
     document.getElementById("hidden-scatter").style.display="none";
 };
+
 
 function map(){
     document.getElementById("hidden-map").style.display="block";
 };
 
+
 function map_cancel(){
     document.getElementById("hidden-map").style.display="none";
 };
 
+
 function close_plot(){
     document.getElementById("plot-result").style.display="none";
 };
+
 
 function bar_plot(){
     var limit = $("#limit").val();
@@ -61,6 +72,7 @@ function bar_plot(){
         }
     });
 };
+
 
 function line_plot(){
     var id_array = new Array();
@@ -86,6 +98,7 @@ function line_plot(){
     });
 };
 
+
 function histogram_plot(){
     $.ajax({
         url: "/plot/histogram/",
@@ -100,6 +113,7 @@ function histogram_plot(){
         }
     });
 };
+
 
 function bubble_plot(){
     var add_param = $("#add_param").val();
@@ -120,6 +134,7 @@ function bubble_plot(){
         }
     });
 };
+
 
 function scatter_plot(){
     var x = $("#x").val();
@@ -142,6 +157,7 @@ function scatter_plot(){
         }
     });
 };
+
 
 function map_plot(){
     var state = $("#state").val();

@@ -278,10 +278,3 @@ def histogram_difference_tuition():
     except PlotlyRequestError:
         print('Account limit reached')
         return '<div></div>'
-
-
-# scatter_public_private(x_axis='Tuition Difference', y_axis='StudentFacultyRatio')
-# scatter_public_private()
-# scatter_university_gdp()
-# mapbox_univ('CA')
-# histogram_difference_tuition()

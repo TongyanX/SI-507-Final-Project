@@ -137,18 +137,3 @@ class NationalUniversity(object):
                 return {'lat': None, 'lng': None}
 
         return cache_file[self.name]
-
-#
-# class StateGDP(object):
-#     """State GDP Class"""
-#     def __init__(self, area=None, data_dict=None):
-#         if data_dict is not None:
-#             for year in data_dict:
-#                 if year[0] == 'Y':
-#                     setattr(self, year.lower(), data_dict[year])
-#             self.area = data_dict.get('Area')
-#             if self.area is None:
-#                 self.area = area
-#
-#         else:
-#             self.area = area
