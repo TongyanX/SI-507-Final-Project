@@ -24,32 +24,29 @@
         <div class="content-table">
             <table>
                 <tbody>
-                    <tr>
+                    {% for plot in plot_list %}
+                        {% if plot.index in [1, 4] %}
+                            <tr>
+                        {% endif %}
                         <td class="plot-unit">
                             <table>
                                 <tbody class="plot-unit-bg">
                                     <tr>
                                         <div class="type">
-                                            <p><strong>Bar plot</strong> - State University</p>
+                                            <p><strong>{{ plot.type }}</strong> - {{ plot.topic }}</p>
                                         </div>
                                     </tr>
                                     <tr class="table-empty-row-2"></tr>
                                     <tr>
                                         <td class="img-td">
-                                            <div class="img-div">
-                                                <img src="/static/img/bar.png"/>
-                                            </div>
+                                            <div class="img-div"><img src="/static/img/{{ plot.img }}"/></div>
                                         </td>
                                         <td class="table-empty-col-2"></td>
                                         <td>
                                             <div class="plot-content">
-                                                <div class="text">
-                                                    <p>
-                                                        To see top 10, 15, 20 states with highest amount of national universities.
-                                                    </p>
-                                                </div>
+                                                <div class="text"><p><br>{{ plot.desc }}</p></div>
                                                 <div class="button-chunk">
-                                                    <button class="button-user" onclick="bar()">Plot</button>
+                                                    <button class="button-user" onclick="{{ plot.func }}()">Plot</button>
                                                 </div>
                                             </div>
                                         </td>
@@ -57,174 +54,16 @@
                                 </tbody>
                             </table>
                         </td>
-                        <td class="table-empty-col"></td>
-                        <td class="plot-unit">
-                            <table>
-                                <tbody class="plot-unit-bg">
-                                    <tr>
-                                        <div class="type">
-                                            <p><strong>Line plot</strong> - State GDP</p>
-                                        </div>
-                                    </tr>
-                                    <tr class="table-empty-row-2"></tr>
-                                    <tr>
-                                        <td class="img-td">
-                                            <div class="img-div">
-                                                <img src="/static/img/line.png"/>
-                                            </div>
-                                        </td>
-                                        <td class="table-empty-col-2"></td>
-                                        <td>
-                                            <div class="plot-content">
-                                                <div class="text">
-                                                    <p>
-                                                        To see GDP time trends (from 1997 to 2016) of all your interested states together. Better within 20 states.
-                                                    </p>
-                                                </div>
-                                                <div class="button-chunk">
-                                                    <button class="button-user" onclick="line()">Plot</button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td class="table-empty-col"></td>
-                        <td class="plot-unit">
-                            <table>
-                                <tbody class="plot-unit-bg">
-                                    <tr>
-                                        <div class="type">
-                                            <p><strong>Histogram</strong> - Tuition Difference</p>
-                                        </div>
-                                    </tr>
-                                    <tr class="table-empty-row-2"></tr>
-                                    <tr>
-                                        <td class="img-td">
-                                            <div class="img-div">
-                                                <img src="/static/img/histo.png"/>
-                                            </div>
-                                        </td>
-                                        <td class="table-empty-col-2"></td>
-                                        <td>
-                                            <div class="plot-content">
-                                                <div class="text">
-                                                    <p>
-                                                        To see discrimination of tuition and fees in public universities for in-state and out-of-state students.
-                                                    </p>
-                                                </div>
-                                                <div class="button-chunk">
-                                                    <button class="button-user" onclick="histogram_plot()">Plot</button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr class="table-empty-row"></tr>
-                    <tr>
-                        <td class="plot-unit">
-                            <table>
-                                <tbody class="plot-unit-bg">
-                                    <tr>
-                                        <div class="type">
-                                            <p><strong>Bubble plot</strong> - University vs GDP</p>
-                                        </div>
-                                    </tr>
-                                    <tr class="table-empty-row-2"></tr>
-                                    <tr>
-                                        <td class="img-td">
-                                            <div class="img-div">
-                                                <img src="/static/img/bubble.png"/>
-                                            </div>
-                                        </td>
-                                        <td class="table-empty-col-2"></td>
-                                        <td>
-                                            <div class="plot-content">
-                                                <div class="text">
-                                                    <p>
-                                                        To see relationship between university amount and GDP value. You can also add some other features.
-                                                    </p>
-                                                </div>
-                                                <div class="button-chunk">
-                                                    <button class="button-user" onclick="bubble()">Plot</button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td class="table-empty-col"></td>
-                        <td class="plot-unit">
-                            <table>
-                                <tbody class="plot-unit-bg">
-                                    <tr>
-                                        <div class="type">
-                                            <p><strong>Scatter plot</strong> - Public vs Private</p>
-                                        </div>
-                                    </tr>
-                                    <tr class="table-empty-row-2"></tr>
-                                    <tr>
-                                        <td class="img-td">
-                                            <div class="img-div">
-                                                <img src="/static/img/scatter.png"/>
-                                            </div>
-                                        </td>
-                                        <td class="table-empty-col-2"></td>
-                                        <td>
-                                            <div class="plot-content">
-                                                <div class="text">
-                                                    <p>
-                                                        To see differences between public and private universities. You can choose features whatever you like.
-                                                    </p>
-                                                </div>
-                                                <div class="button-chunk">
-                                                    <button class="button-user" onclick="scatter()">Plot</button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td class="table-empty-col"></td>
-                        <td class="plot-unit">
-                            <table>
-                                <tbody class="plot-unit-bg">
-                                    <tr>
-                                        <div class="type">
-                                            <p><strong>Map Plot</strong> - University Location</p>
-                                        </div>
-                                    </tr>
-                                    <tr class="table-empty-row-2"></tr>
-                                    <tr>
-                                        <td class="img-td">
-                                            <div class="img-div">
-                                                <img src="/static/img/map.png"/>
-                                            </div>
-                                        </td>
-                                        <td class="table-empty-col-2"></td>
-                                        <td>
-                                            <div class="plot-content">
-                                                <div class="text">
-                                                    <p>
-                                                        To see a map including all universities in your interested state <strong>(mapbox API key is required)</strong>.
-                                                    </p>
-                                                </div>
-                                                <div class="button-chunk">
-                                                    <button class="button-user" onclick="map()">Plot</button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
+                        {% if plot.index in [1, 2, 4, 5] %}
+                            <td class="table-empty-col"></td>
+                        {% endif %}
+                        {% if plot.index in [3, 6] %}
+                            </tr>
+                        {% endif %}
+                        {% if plot.index == 3 %}
+                            <tr class="table-empty-row"></tr>
+                        {% endif %}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

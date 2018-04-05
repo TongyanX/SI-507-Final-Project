@@ -164,7 +164,7 @@ The rebuilding process is **fast** when it is based on the **cache files**. If t
 			- **tableFunc.py** (*functions to prepare data for DataTables*)  
 			- **universityData.py** (*build GDP_State table in database*)  
 		- **secrets** (*secret files*)  
-			- **secret_file.py** (*API keys*)  
+			- **secret_file.py** (*API keys & Access Token*)  
 		- **tests** (*test files*)  
 			- **test_file.py** (*unittest file*)  
 	- **static** (*CSS files & JS files & images*)  
@@ -193,26 +193,11 @@ The rebuilding process is **fast** when it is based on the **cache files**. If t
 		- **index.html** (*index*)  
 		- **plot.html** (*plot guide page*)  
 		- **table.html** (*table guide page*)  
-		- **table_gdp.html** (*state GDP table page*)  
-		- **table_univ.html** (*national university table page*)  
-	- **venv** (*content neglected*)  
+		- **table_data.html** (*template of national university table & state GDP table*)
 	- **.gitignore**  
-	- **ez_setup.py** (*run the whole project easily*)  
 	- **README.md**  
+	- **requirements.txt** (*modules required for the project*)
 	- **setup.py** (*run the whole project typically*)  
-  
-## Virtual Environment  
-  
-This project is programmed in **Python3**.  
-  
-**Python 3.6.4** is included in the virtual environment.  
->**Local Path:** SI-507-Final-Project/venv  
-  
-**Additional packages** listed below is required and is included in the virtual environment:  
-- **flask** -- *v0.12.2*  
-- **plotly** -- *v2.5.1*  
-- **requests** -- *v2.18.4*  
-- **bs4** -- *v0.0.1*  
   
 ## Important Python Functions (or Files)  
   
@@ -264,7 +249,24 @@ Ordering algorithm is re-programmed in the file due to special forms of data, wh
   
 # User Guide  
 
-Follow the instructions below to run / set up the project.
+## Project Environment  
+  
+This project is programmed under **Python 3.6.4**.  
+All **Python3** should be fine for running the project.
+  
+## Module requirements
+ 
+- **flask** -- *v0.12.2*  
+- **plotly** -- *v2.5.1*  
+- **requests** -- *v2.18.4*  
+- **bs4** -- *v0.0.1*  
+
+Main modules are listed above. Check **requirements.txt** for more details.
+> **Local Path:** SI-507-Final-Project/requirements.txt
+
+The project can automatically install (using pip) to install the missing required modules after getting user's permission. See **Running** for more details.
+	
+	
 
 ## Before Running
 
@@ -277,35 +279,32 @@ Follow the instructions below to run / set up the project.
 2. Open **Terminal** and cd to the **root directory**.
 		``> cd SI-507-Final-Project/``
 
-## Typical Running
-
-1. Build up **Virtual Environment**.
-	```
-	> source venv/bin/activate
-	```
+3. **Install modules before running**
+	Two ways to install modules before running the project.
+	
+	1. ``> pip3 install flask``
+		``> pip3 install plotly``
+		``> pip3 install requests``
+		``> pip3 install bs4``
 		
-2. **Run the project**.
-	```
-	> python3 setup.py
-	```
+	2. ``> pip3 install -r requirements.txt``
 
-3. **Terminate the project**.
-	```
-	>  [ Ctrl + C ]
-	> deactivate
-	```
-
-## Easy Running (*if python3 is already installed*)
+## Running
 
 1. **Run the project**.
-	```
-	> python3 ez_setup.py
-	```
+	```> python3 setup.py```
 
-2. **Terminate the project**.
-	```
-	> [ Ctrl + C ]
-	```
+2. **Install modules while running**.
+	If any required module is not found, user will be asked whether or not to install the module. Example:
 	
+	``Module <flask> is not found. Would you like to pip install it? (y/n) ``
+	
+	If the answer is 'y', the project will automatically install this module. 
+	If the answer is 'n', the project will not install this module and but stop. 
+	If the answer is neither 'y' nor 'n', the project will ask again.
+
+3. **Terminate the project**.
+	``>  [ Ctrl + C ]``
+
 	<br>
 	

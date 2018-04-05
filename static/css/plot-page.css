@@ -24,14 +24,14 @@
     background-color: #283655
 }
 .type {
-    background-color: #FFFFFF;
+    color: #FFFFFF;
     width: 370px;
-    height: 40px;
+    height: 30px;
     text-align: center;
     font-size: 20px
 }
 img {
-    height: 190px;
+    height: 200px;
     width: 240px
 }
 .img-td {
@@ -43,14 +43,14 @@ img {
     position: relative;
     top: 0px;
     width: 125px;
-    height: 195px;
+    height: 205px;
     background-color: #FFFFFF
 }
 .text {
     padding-left: 5px;
     padding-right: 5px;
     width: 125px;
-    height: 150px;
+    height: 160px;
     text-align: left;
     font-size: 10px
 }
