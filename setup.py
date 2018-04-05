@@ -117,9 +117,7 @@ if __name__ == '__main__':
         module_list = [m.split('==')[0].lower() for m in r.readlines()]
 
     from pip import get_installed_distributions as gid
-
     module_list_exist = [m.key for m in gid()]
-    print(module_list_exist)
 
     module_list_required = sorted(list(set(module_list) - set(module_list_exist)))
 
