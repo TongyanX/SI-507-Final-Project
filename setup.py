@@ -2,6 +2,7 @@
 """Set up Server"""
 
 import os
+import sys
 import webbrowser
 from flask import Flask, request, render_template
 
@@ -112,29 +113,6 @@ def mapbox():
 
 
 if __name__ == '__main__':
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(base_dir + '/requirements.txt') as r:
-        module_list = [m.split('==')[0].lower() for m in r.readlines()]
-
-    from pip import get_installed_distributions as gid
-    module_list_exist = [m.key for m in gid()]
-
-    module_list_required = sorted(list(set(module_list) - set(module_list_exist)))
-
-    for m in module_list_required:
-        while True:
-            command = input('Module <{}> is not found. Would you like to pip install it? (y/n) '.format(m))
-            if command not in ['y', 'n']:
-                print('Invalid Input.')
-            else:
-                break
-        if command == 'y':
-            os.system('pip3 install {}'.format(m))
-        else:
-            print('\n * Failed to run the project.\n')
-            exit()
-
-    print(' * All required modules are found. Try running the project...')
     plotly_setup()
     webbrowser.open('http://127.0.0.1:5000/')
     app.run()

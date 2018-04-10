@@ -196,8 +196,9 @@ The rebuilding process is **fast** when it is based on the **cache files**. If t
 		- **table_data.html** (*template of national university table & state GDP table*)
 	- **.gitignore**  
 	- **README.md**  
-	- **requirements.txt** (*modules required for the project*)
-	- **setup.py** (*run the whole project typically*)  
+	- **requirements.txt** (*modules required for the project*)  
+	- **run.py** (*run the whole project intelligently*)  
+	- **setup.py** (*setup / run the whole project typically*)
   
 ## Important Python Functions (or Files)  
   
@@ -279,10 +280,10 @@ The project can automatically install (using pip) to install the missing require
 2. Open **Terminal** and cd to the **root directory**.
 		``> cd SI-507-Final-Project/``
 
-3. **Install modules before running**
+3. Install modules before running (*Optional*).
 	Two ways to install modules before running the project.
 	
-	1. ``> pip3 install flask``
+	1.  ``> pip3 install flask``
 		``> pip3 install plotly``
 		``> pip3 install requests``
 		``> pip3 install bs4``
@@ -291,20 +292,43 @@ The project can automatically install (using pip) to install the missing require
 
 ## Running
 
-1. **Run the project**.
-	```> python3 setup.py```
+- **Run the project typically** (*All modules need to be installed before*).  
+   ``> python3 setup.py``  
+  
+- **Run the project intelligently**.  
+   ``> python3 setup.py``  
+   1. Select mode.  
+       User will be asked whether use current environment or virtual environment to run the project.  
+       ``Run the project under: (1/2)``
+       ``1. Current environment``
+       ``2. Virtual environment``  
+       If the answer is '1', see step 2.   
+       If the answer is '2', see step 3.   
+       If the answer is neither '1' nor '2', the project will ask again.  
+       
+   2. **Current Environment**: 
+       The project will be run under current environment, no matter if virtual environment is using or not.
+   
+	   If any required module is not found, user will be asked whether or not to install the module. 
 
-2. **Install modules while running**.
-	If any required module is not found, user will be asked whether or not to install the module. Example:
-	
-	``Module <flask> is not found. Would you like to pip install it? (y/n) ``
-	
-	If the answer is 'y', the project will automatically install this module. 
-	If the answer is 'n', the project will not install this module and but stop. 
-	If the answer is neither 'y' nor 'n', the project will ask again.
+	   Example:  
+       ``Module <flask> is not found. Would you like to pip install it? (y/n) ``  
+       If the answer is 'y', the project will automatically install this module.   
+       If the answer is 'n', the project will not install this module and but stop.   
+       If the answer is neither 'y' nor 'n', the project will ask again.  
+   
+   3. **Virtual Environment**:
+       The project will automatically create a virtual environment with all required packages in it. And then, the project will be run under newly created virtual environment.
 
-3. **Terminate the project**.
-	``>  [ Ctrl + C ]``
+	   If an existed virtual environment is found, user will be asked whether or not to use this virtual environment. 
 
-	<br>
-	
+	   Example:  
+       ``Existing virtual environment is found. Use it? (y/n) ``
+       If the answer is 'y', the project will use the existing virtual environment (may cause **ERROR** if the existing environment is not created by the project or is modified).  
+       If the answer is 'n', the project will delete the existing virtual environment and create a new one.   
+       If the answer is neither 'y' nor 'n', the project will ask again.  
+  
+- **Terminate the project**.  
+   ``>  [ Ctrl + C ]``
+  
+  <br>
