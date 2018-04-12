@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """Set up Server"""
 
-import os
-import sys
 import webbrowser
 from flask import Flask, request, render_template
 

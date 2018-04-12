@@ -275,7 +275,7 @@ The project can automatically install (using pip) to install the missing require
 	- **Username and API Key for Plotly** is **required** for plotting.
 	- **API Key for Mapbox** is **required** for map plotting.
 	- **Google Places API Key** is **suggested** to be filled in, but **not required**.
-		> **Local Path:** SI-507-Final-Project/project/secrets/secret_file.py
+	> **Local Path:** SI-507-Final-Project/project/secrets/secret_file.py
 
 2. Open **Terminal** and cd to the **root directory**.
 		``> cd SI-507-Final-Project/``
@@ -296,7 +296,7 @@ The project can automatically install (using pip) to install the missing require
    ``> python3 setup.py``  
   
 - **Run the project intelligently**.  
-   ``> python3 setup.py``  
+   ``> python3 run.py``  
    1. Select mode.  
        User will be asked whether use current environment or virtual environment to run the project.  
        ``Run the project under: (1/2)``
