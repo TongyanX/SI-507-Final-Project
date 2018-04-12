@@ -2,9 +2,9 @@
 """Secret Code"""
 
 
-plotly_username = 'PHOELIUS'
-plotly_api_key = 'tB6ehX8TIF33zw4ci56E'
+plotly_username = 'ENTER YOUR PLOTLY USER NAME HERE'
+plotly_api_key = 'PASTE YOUR PLOTLY API KEY HERE'
 
-mapbox_access_token = 'pk.eyJ1IjoicGhvZWxpdXMiLCJhIjoiY2pkeHBhdmcxMDIxdTJ3czlhdHJpZnZkNCJ9.jLNkdcmE-64UD3GfnHB61g'
+mapbox_access_token = 'PASTE YOUR MAPBOX ACCESS TOKEN HERE'
 
-google_places_api_key = 'AIzaSyBCtbUaHmv_2n__nCXoTaR3NjjLZPZg4FA'
+google_places_api_key = 'PASTE YOUR GOOGLE PLACES API KEY HERE'
