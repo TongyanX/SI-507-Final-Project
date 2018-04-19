@@ -295,7 +295,7 @@ The project can automatically install (using pip) to install the missing require
 - **Run the project typically** (*All modules need to be installed before*).  
    ``> python3 setup.py``  
   
-- **Run the project intelligently**.  
+- **Run the project intelligently** (*Mac OS only*).  
    ``> python3 run.py``  
    1. Select mode.  
        User will be asked whether use current environment or virtual environment to run the project.  
