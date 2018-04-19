@@ -272,10 +272,10 @@ The project can automatically install (using pip) to install the missing require
 ## Before Running
 
 1. Complete **secret_file.py**.
+	> **Local Path:** SI-507-Final-Project/project/secrets/secret_file.py
 	- **Username and API Key for Plotly** is **required** for plotting.
 	- **API Key for Mapbox** is **required** for map plotting.
 	- **Google Places API Key** is **suggested** to be filled in, but **not required**.
-	> **Local Path:** SI-507-Final-Project/project/secrets/secret_file.py
 
 2. Open **Terminal** and cd to the **root directory**.
 		``> cd SI-507-Final-Project/``
