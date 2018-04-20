@@ -4,7 +4,7 @@
 import csv
 import os
 
-from project.scripts.dbOperation import Database
+from model import Database
 
 # Data Source:
 # https://www.bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=2#reqid=70&step=4&isuri=1&7003=200&7001=1200&7002=1&7090=70
@@ -28,16 +28,19 @@ def gdp_state_table():
     t_name = 'GDP_State'
 
     column_name, column_data = get_gdp_data()
-    column_list = ['TEXT'] + ['INT'] * (len(column_name) - 1)
+    column_list = ['INT'] * (len(column_name) - 1)
 
     table_dict = dict(name=t_name,
-                      column=list(zip(column_name, column_list)),
-                      key=column_name[0]
-                      )
+                      column=[('StateId', 'INTEGER')] + list(zip(column_name[1:], column_list)))
+
+    statement = 'INSERT INTO {} VALUES ('.format(t_name)
+    statement += '(SELECT Id FROM State_Abbr WHERE StateName = ?)'
+    statement += ', ?' * (len(column_name) - 1)
+    statement += ')'
 
     with Database() as db_operator:
         db_operator.create_table(table_dict)
-        db_operator.insert_data([tuple(row) for row in column_data], t_name)
+        db_operator.insert_data([tuple(row) for row in column_data[1:]], statement)
 
 
 def main():

@@ -4,9 +4,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-from project.scripts.classDef import NationalUniversity
-from project.scripts.dbOperation import Database
+from model import Database
 from project.scripts.cacheOperation import *
+from project.scripts.classDef import NationalUniversity
 
 agent = {'User-Agent': 'Chrome/59.0.3071.115'}
 
@@ -149,10 +149,10 @@ def national_university_table():
     db_operator = Database()
 
     table_dict = dict(name=t_name,
-                      column=[('ID', 'INT'),
+                      column=[('Id', 'INTEGER'),
                               ('Name', 'TEXT'),
                               ('Ranking', 'TEXT'),
-                              ('State', 'TEXT'),
+                              ('StateId', 'INT'),
                               ('City', 'TEXT'),
                               ('Type', 'TEXT'),
                               ('FoundYear', 'TEXT'),
@@ -165,16 +165,22 @@ def national_university_table():
                               ('FemalePercentage', 'REAL'),
                               ('Latitude', 'INT'),
                               ('Longitude', 'INT')],
-                      key='ID')
+                      key='Id')
     db_operator.create_table(table_dict)
 
+    statement = 'INSERT INTO {} VALUES (NULL'.format(t_name)
+    statement += ', ?' * 2
+    statement += ', (SELECT Id FROM State_Abbr WHERE StateAbbr = ?)'
+    statement += ', ?' * 12
+    statement += ')'
+
     data_list = []
-    for (i, nu_obj) in enumerate(get_all_national_university()):
-        data_list.append((i + 1, nu_obj.name, nu_obj.ranking, nu_obj.state, nu_obj.city,
+    for nu_obj in get_all_national_university():
+        data_list.append((nu_obj.name, nu_obj.ranking, nu_obj.state, nu_obj.city,
                           nu_obj.type, nu_obj.found_year, nu_obj.endowment, nu_obj.tuition_in_state,
                           nu_obj.tuition_out_state, nu_obj.enrollment, nu_obj.median_salary,
                           nu_obj.student_faculty, nu_obj.female, nu_obj.lat, nu_obj.lng))
-    db_operator.insert_data(data_list, t_name)
+    db_operator.insert_data(data_list, statement)
 
 
 def main():

@@ -101,7 +101,7 @@ class TestDatabaseOperation(unittest.TestCase):
 
     def setUp(self):
         """Generate Database Operator"""
-        from project.scripts.dbOperation import Database
+        from model import Database
         self.db = Database()
 
     def test_exiting_table(self):

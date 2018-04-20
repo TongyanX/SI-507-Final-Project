@@ -9,7 +9,7 @@ class Database(object):
     """Database Operator"""
     def __init__(self):
         self.db_name = 'National_University.sqlite'
-        self.db_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/database/'
+        self.db_dir = os.path.dirname(os.path.abspath(__file__)) + '/project/database/'
         self.con = sqlite3.connect(self.db_dir + self.db_name)
         self.cur = self.con.cursor()
         self.translate_dict = {
@@ -33,6 +33,10 @@ class Database(object):
 
     def check_database(self):
         """Check if Database is Complete"""
+        if not self.check_table('State_Abbr'):
+            from project.scripts import stateAbbrData
+            stateAbbrData.main()
+
         if not self.check_table('National_University'):
             from project.scripts import universityData
             universityData.main()
@@ -40,10 +44,6 @@ class Database(object):
         if not self.check_table('GDP_State'):
             from project.scripts import gdpData
             gdpData.main()
-
-        if not self.check_table('State_Abbr'):
-            from project.scripts import stateAbbrData
-            stateAbbrData.main()
 
     def create_table(self, table_dict):
         """Create Table to Store Data"""
@@ -58,22 +58,16 @@ class Database(object):
         statement = 'CREATE TABLE IF NOT EXISTS {} ('.format(t_name)
         for i in range(len(col_list)):
             statement += '\'{}\' {}, '.format(col_name[i], col_type[i])
+            if table_dict.get('key', None) == col_name[i]:
+                statement = statement[0:-2] + ' PRIMARY KEY AUTOINCREMENT, '
 
-        if 'key' in table_dict:
-            key = table_dict['key']
-            statement += 'PRIMARY KEY(\'{}\'))'.format(key)
-        else:
-            statement = statement[:-2] + ')'
+        statement = statement[:-2] + ')'
 
         self.cur.execute(statement)
         self.con.commit()
 
-    def insert_data(self, data_list, t_name):
+    def insert_data(self, data_list, statement):
         """Insert Data Tuples to a Given Table"""
-        statement = 'INSERT INTO {} VALUES ('.format(t_name)
-        statement += '?, ' * len(data_list[0])
-        statement = statement[:-2] + ')'
-
         for data in data_list:
             self.cur.execute(statement, data)
 
@@ -92,10 +86,10 @@ class Database(object):
     def get_university_count(self, limit=20):
         """List States with Most National Universities"""
         statement = '''
-                        SELECT StateName, COUNT(n.ID) FROM National_University AS n 
+                        SELECT s.StateName, COUNT(n.Id) FROM National_University AS n 
                         JOIN State_Abbr AS s 
-                            ON n.State = s.StateAbbr 
-                        GROUP BY State 
+                            ON n.StateId = s.Id 
+                        GROUP BY n.StateId 
                         ORDER BY COUNT(n.ID) DESC 
                         LIMIT {}
                     '''.format(limit)
@@ -107,13 +101,14 @@ class Database(object):
         """List Relationship between National University Amount and GDP"""
         arg = self.translate_dict[additional_variable]
         statement = '''
-                        SELECT State, StateName, COUNT(ID), Y2016, {} FROM National_University 
-                        JOIN State_Abbr
-                            ON State = StateAbbr
-                        JOIN GDP_State
-                            ON StateName = Area
-                        GROUP BY State
+                        SELECT s.StateAbbr, s.StateName, COUNT(n.Id), g.Y2016, {} FROM National_University AS n 
+                        JOIN State_Abbr AS s 
+                            ON n.StateId = s.Id
+                        JOIN GDP_State AS g 
+                            ON s.Id = g.StateId
+                        GROUP BY n.StateId
                     '''.format(arg)
+        print(statement)
         self.cur.execute(statement)
         result_list = self.cur.fetchall()
         return result_list
@@ -140,10 +135,12 @@ class Database(object):
     def get_state_gdp(self, state_abbr):
         """Get Historical GDP Data of A State"""
         statement = '''
-                        SELECT * FROM GDP_State 
-                        JOIN State_Abbr
-                            ON Area = StateName
-                        WHERE StateAbbr = \'{}\'
+                        SELECT s.StateName, g.Y1997, g.Y1998, g.Y1999, g.Y2000, g.Y2001, g.Y2002, g.Y2003, g.Y2004, 
+                               g.Y2005, g.Y2006, g.Y2007, g.Y2008, g.Y2009, g.Y2010, g.Y2011, g.Y2012, g.Y2013, 
+                               g.Y2014, g.Y2015, g.Y2016 FROM GDP_State AS g 
+                        JOIN State_Abbr AS s 
+                            ON g.StateId = s.Id
+                        WHERE s.StateAbbr = \'{}\'
                     '''.format(state_abbr)
         self.cur.execute(statement)
         result = self.cur.fetchone()
@@ -152,8 +149,10 @@ class Database(object):
     def get_gps_data(self, state_abbr):
         """Get GPS Data for All National Universities within A State"""
         statement = '''
-                        SELECT Name, Latitude, Longitude FROM National_University
-                        WHERE State = \'{}\'
+                        SELECT n.Name, n.Latitude, n.Longitude FROM National_University AS n 
+                        JOIN State_Abbr AS s 
+                            ON n.StateId = s.Id
+                        WHERE s.StateAbbr = \'{}\'
                     '''.format(state_abbr)
         self.cur.execute(statement)
         result_list = self.cur.fetchall()
@@ -173,8 +172,13 @@ class Database(object):
     def get_state_univ(self, state_abbr):
         """Get All National Universities within A State"""
         statement = '''
-                        SELECT * FROM National_University 
-                        WHERE State = \'{}\' 
+                        SELECT n.Id, n.Name, n.Ranking, s.StateAbbr, n.City, n.Type, n.FoundYear, n.[Endowment(M)], 
+                               n.TuitionAndFeesInState, n.TuitionAndFeesOutOfState, n.Enrollment, 
+                               n.MedianStartingSalary, n.StudentFacultyRatio, n.FemalePercentage, 
+                               n.Latitude, n.Longitude FROM National_University AS n 
+                        JOIN State_Abbr AS s 
+                            ON n.StateId = s.Id
+                        WHERE s.StateAbbr = \'{}\' 
                     '''.format(state_abbr)
         self.cur.execute(statement)
         result_list = self.cur.fetchall()

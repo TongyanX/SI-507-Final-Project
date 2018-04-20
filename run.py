@@ -81,7 +81,7 @@ def run(python_bin):
     goodbye = '\n * The project is shut down.\n'
 
     print(welcome)
-    script_file = base_dir + '/setup.py'
+    script_file = base_dir + '/app.py'
     sub = subprocess.Popen([python_bin, script_file])
 
     try:

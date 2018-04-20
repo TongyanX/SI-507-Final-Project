@@ -4,7 +4,7 @@
 import json
 import os
 
-from project.scripts.dbOperation import Database
+from model import Database
 
 # Data Source:
 # https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_hash.json
@@ -28,12 +28,16 @@ def state_abbr_table():
     data_dict['DC'] = 'District of Columbia'
 
     table_dict = dict(name=t_name,
-                      column=[('StateAbbr', 'TEXT'),
-                              ('StateName', 'TEXT')])
+                      column=[('Id', 'INTEGER'),
+                              ('StateAbbr', 'TEXT'),
+                              ('StateName', 'TEXT')],
+                      key='Id')
+
+    statement = 'INSERT INTO {} VALUES (NULL, ?, ?)'.format(t_name)
 
     with Database() as db_operator:
         db_operator.create_table(table_dict)
-        db_operator.insert_data(list(data_dict.items()), t_name)
+        db_operator.insert_data(list(data_dict.items()), statement)
 
 
 def main():

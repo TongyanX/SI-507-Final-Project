@@ -3,7 +3,7 @@
 
 import json
 
-from project.scripts.dbOperation import Database
+from model import Database
 
 
 def state_univ(state_list):

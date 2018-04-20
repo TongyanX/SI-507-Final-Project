@@ -6,7 +6,7 @@ from plotly.graph_objs import *
 from plotly.offline import plot as offplot
 from plotly.tools import set_credentials_file
 
-from project.scripts.dbOperation import Database
+from model import Database
 from project.secrets.secret_file import mapbox_access_token
 
 
