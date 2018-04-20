@@ -121,7 +121,7 @@ class TestDatabaseOperation(unittest.TestCase):
 
         statement = '''
                         SELECT * FROM GDP_State 
-                        WHERE Area = 'Michigan' 
+                        WHERE StateId = 27 
                     '''
         try:
             self.db.cur.execute(statement)
@@ -139,13 +139,13 @@ class TestDatabaseOperation(unittest.TestCase):
             self.db.cur.execute(statement)
             result = self.db.cur.fetchall()
             self.assertEqual(len(result), 1)
-            self.assertEqual(result[0][0], 'MI')
+            self.assertEqual(result[0][1], 'MI')
         except Exception:
             self.fail()
 
-    def test_method(self):
-        """Test Database Operator's Other Methods"""
-        pass
+    # def test_method(self):
+    #     """Test Database Operator's Other Methods"""
+    #     pass
 
 
 if __name__ == '__main__':

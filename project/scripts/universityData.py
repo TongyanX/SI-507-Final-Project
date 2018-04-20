@@ -13,10 +13,16 @@ agent = {'User-Agent': 'Chrome/59.0.3071.115'}
 
 def get_national_university_data(univ_url):
     """Request National University Data through US News Website"""
+    f_name = 'national_university_html.json'
     base_url = 'https://www.usnews.com'
 
-    resp = requests.get(base_url + univ_url, headers=agent)
-    soup = BeautifulSoup(resp.text, 'html.parser')
+    html_cache = load_cache(f_name)
+    if univ_url not in html_cache:
+        resp = requests.get(base_url + univ_url, headers=agent)
+        html_cache[univ_url] = resp.text
+        save_cache(html_cache, f_name)
+
+    soup = BeautifulSoup(html_cache[univ_url], 'html.parser')
 
     map_chunk = soup.find('section', attrs={'class': 'hero-stats-widget-map'})
     address = map_chunk.find('p').find('strong').text.strip()
