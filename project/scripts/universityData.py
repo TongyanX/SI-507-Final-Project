@@ -15,8 +15,8 @@ def get_national_university_data(univ_url):
     """Request National University Data through US News Website"""
     f_name = 'national_university_html.json'
     base_url = 'https://www.usnews.com'
-
     html_cache = load_cache(f_name)
+
     if univ_url not in html_cache:
         resp = requests.get(base_url + univ_url, headers=agent)
         html_cache[univ_url] = resp.text
@@ -30,13 +30,21 @@ def get_national_university_data(univ_url):
     stats_list = soup.find('section', attrs={'class': 'hero-stats-widget-stats'}).find('ul').find_all('strong')
     salary_chunk = soup.find_all('div', attrs={'class': 'block-looser'})[4].find('span', attrs={'class': 'text-strong'})
 
-    life_resp = requests.get(base_url + univ_url + '/student-life', headers=agent)
-    life_soup = BeautifulSoup(life_resp.text, 'html.parser')
+    if univ_url + '/student-life' not in html_cache:
+        life_resp = requests.get(base_url + univ_url + '/student-life', headers=agent)
+        html_cache[univ_url + '/student-life'] = life_resp.text
+        save_cache(html_cache, f_name)
+
+    life_soup = BeautifulSoup(html_cache[univ_url + '/student-life'], 'html.parser')
     life_chunk = life_soup.find('div', attrs={'id': 'StudentBody'})
     gender_chunk = life_chunk.find('span', attrs={'data-test-id': 'v_percent'})
 
-    academic_resp = requests.get(base_url + univ_url + '/academics', headers=agent)
-    academic_soup = BeautifulSoup(academic_resp.text, 'html.parser')
+    if univ_url + '/academics' not in html_cache:
+        academic_resp = requests.get(base_url + univ_url + '/academics', headers=agent)
+        html_cache[univ_url + '/academics'] = academic_resp.text
+        save_cache(html_cache, f_name)
+
+    academic_soup = BeautifulSoup(html_cache[univ_url + '/academics'], 'html.parser')
     faculty_chunk = academic_soup.find('div', attrs={'data-field-id': 'vStudentFacultyRatio'})
 
     found_year = info_list[1].find('span', attrs={'class': 'heading-small'}).text

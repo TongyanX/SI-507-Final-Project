@@ -147,7 +147,8 @@ The rebuilding process is **fast** when it is based on the **cache files**. If t
 		- **SI507_Final_Project_Proposal_Simple.txt**  
 	- **project** (*project data & python files*)  
 		- **cache** (*cache files*)  
-			- **national_university_gps.json**  
+			- **national_university_gps.json** 
+			- **national_university_html.json**  
 			- **national_university_info.json**  
 		- **database** (*organized database*)  
 			- **National_University.sqlite**  
@@ -157,7 +158,6 @@ The rebuilding process is **fast** when it is based on the **cache files**. If t
 		- **scripts** (*main python scripts*)  
 			- **cacheOperation.py** (*cache operations: load & save cache*)  
 			- **classDef.py** (*class definitions: class NationalUniversity*)  
-			- **dbOperation.py** (*database operations: creating table & inserting data & getting data for presentation*)  
 			- **gdpData.py** (*build GDP_State table in database*)  
 			- **plotFunc.py** (*functions to plot using Plotly*)  
 			- **stateAbbrData.py** (*build GDP_State table in database*)  
@@ -194,11 +194,12 @@ The rebuilding process is **fast** when it is based on the **cache files**. If t
 		- **plot.html** (*plot guide page*)  
 		- **table.html** (*table guide page*)  
 		- **table_data.html** (*template of national university table & state GDP table*)
-	- **.gitignore**  
+	- **.gitignore** 
+	- **app.py** (*setup / run the whole project typically*)
+	- **model.py** (*database operations: creating table & inserting data & getting data for presentation*)   
 	- **README.md**  
 	- **requirements.txt** (*modules required for the project*)  
 	- **run.py** (*run the whole project intelligently*)  
-	- **setup.py** (*setup / run the whole project typically*)
   
 ## Important Python Functions (or Files)  
   
@@ -231,7 +232,7 @@ with Database() as db_operator:
  # <any method of db_operator can be used here>  
 # db_operator is abandoned and the database connection is closed  
 ```  
->**Defined at:** SI-507-Final-Project/project/scripts/dbOperation.py   
+>**Defined at:** SI-507-Final-Project/model.py   
 ## Important JavaScript Functions (or Files)  
   
 **plot.js**  
@@ -293,7 +294,7 @@ The project can automatically install (using pip) to install the missing require
 ## Running
 
 - **Run the project typically** (*All modules need to be installed before*).  
-   ``> python3 setup.py``  
+   ``> python3 app.py``  
   
 - **Run the project intelligently** (*Mac OS only*).  
    ``> python3 run.py``  
